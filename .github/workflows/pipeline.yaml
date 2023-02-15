@@ -39,9 +39,7 @@ jobs:
     #     AWS_ACCESS_KEY_ID:  ${{secrets.AWS_SECRET_ACCESS_KEY}}
     #     ACCOUNT_NUMBER: ${{secrets.ACCOUNT_NUMBER}}
     #     ECR_REPO_NAME: ${{vars.ECR_REPO_NAME}}
-    #   run: |
-    #     python 05_aprovisionar.py    
-    # - name: Imagen Contendor
-    #   run: docker build . --file Dockerfile --tag dummyml:latest
+    - name: Imagen Contendor
+      run: docker build . --file Dockerfile --tag dummyml:latest
       
     
