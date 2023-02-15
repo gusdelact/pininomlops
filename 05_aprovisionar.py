@@ -61,7 +61,7 @@ ecs_cliente.create_service(cluster='dummylinear',
                            networkConfiguration= {
                                'awsvpcConfiguration': {
                                   'assignPublicIp' : 'ENABLED',
-                                  'securityGroups': ['sg-08ec75aa8b8f7c45b'],
+                                  'securityGroups': ['sg-025066ab05b7439d2'],
                                   'subnets': ['subnet-0d5bef679df57ba9e',
                                                'subnet-02efe5c7251ec5212',
                                                'subnet-02acd8f884e171a3c',
