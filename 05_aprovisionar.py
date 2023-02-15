@@ -54,7 +54,7 @@ print("Creando Servicio de ECS")
 
 ecs_cliente.create_service(cluster='dummylinear',
                            serviceName='svcdummylinear2',
-                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:1'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],,os.environ['ECR_REPO_NAME']),
+                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:1'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],os.environ['ECR_REPO_NAME']),
                            launchType ='FARGATE',
                            desiredCount=1,
                            networkConfiguration= {
