@@ -17,7 +17,7 @@ jobs:
          python -m pip install --upgrade pip
          pip install -r requirements.txt
     - name: Generar Datos
-        run: |
+      run: |
          python 01_generar_datos.py
          ls -l sample.csv
          
