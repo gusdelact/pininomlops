@@ -39,7 +39,7 @@ ecs_cliente.register_task_definition(
      containerDefinitions=[
          { 
             'name': 'dummylinear',
-            'image': '{}.dkr.ecr.{}.amazonaws.com/{}'.format(os.environ['ACCOUNT_NUMBER'],os.environ ['AWS_DEFAULT_REGION'],os.environ['ECR_REPO_NAME']) ),
+            'image': '{}.dkr.ecr.{}.amazonaws.com/{}'.format(os.environ['ACCOUNT_NUMBER'],os.environ ['AWS_DEFAULT_REGION'],os.environ['ECR_REPO_NAME']) ,
             'portMappings': [{'containerPort': 5000, 'hostPort': 5000, 'protocol': 'tcp', 'name': 'dummylinear-5000-tcp',
                               'appProtocol': 'http'}] ,
          }
