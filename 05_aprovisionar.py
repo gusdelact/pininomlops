@@ -3,14 +3,6 @@ import os
 import time
 
 
-#cambiar las llaves de acceso y region
-
-print(os.environ['AWS_ACCESS_KEY_ID'])
-print(os.environ['AWS_SECRET_ACCESS_KEY'])
-print(os.environ ['AWS_DEFAULT_REGION'])
-print(os.environ['ECR_REPO_NAME'])
-print(os.environ['ACCOUNT_NUMBER'])
-
 
 #crear repositorio de imagen de contenedores - Elastic Container Registry
 
@@ -48,8 +40,8 @@ ecs_cliente.register_task_definition(
     
  )
  
-#esperar 2 minutos
-time.sleep(120)
+#esperar 30 segundos
+time.sleep(30)
 #Crear servicio
 print("Creando Servicio de ECS")
 
