@@ -37,6 +37,7 @@ jobs:
          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          ACCOUNT_NUMBER: ${{ secrets.ACCOUNT_NUMBER }}
          ECR_REPO_NAME: ${{ vars.ECR_REPO_NAME }}
+         AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
       run: |
          python 05_aprovisionar.py
     #   env:
