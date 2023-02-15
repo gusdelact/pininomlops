@@ -33,10 +33,10 @@ jobs:
          python 04_validar.py
     - name: Aprovisionar
        env:
-        AWS_ACCESS_KEY_ID:  ${{secrets.AWS_ACCESS_KEY_ID}}
-        AWS_ACCESS_KEY_ID:  ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        ACCOUNT_NUMBER: ${{secrets.ACCOUNT_NUMBER}}
-        ECR_REPO_NAME: ${{vars.ECR_REPO_NAME}}
+         AWS_ACCESS_KEY_ID:  ${{secrets.AWS_ACCESS_KEY_ID}}
+         AWS_ACCESS_KEY_ID:  ${{secrets.AWS_SECRET_ACCESS_KEY}}
+         ACCOUNT_NUMBER: ${{secrets.ACCOUNT_NUMBER}}
+         ECR_REPO_NAME: ${{vars.ECR_REPO_NAME}}
        run: |
          python 05_aprovisionar.py    
     - name: Imagen Contendor
