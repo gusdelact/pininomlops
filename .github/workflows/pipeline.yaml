@@ -20,4 +20,15 @@ jobs:
       run: |
          python 01_generar_datos.py
          ls -l sample.csv
-         
+    - name: Ingestar Datos
+      run: |
+         python 02_ingestar.py
+         ls -l train.csv test.csv
+    - name: Entrenar 
+      run: |
+         python 03_entrenar.py
+         ls -l mlparams
+    - name: Probar
+      run: |
+         python 04_validar.py
+    
