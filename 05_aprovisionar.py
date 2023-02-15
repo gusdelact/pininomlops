@@ -28,8 +28,9 @@ ecs_cliente = boto3.client('ecs')
 #crear defincion de Tarea
 print("Creando Definicion de Tarea de ECS")
 
+task_name = 'task{}'.format(os.environ['ECR_REPO_NAME'])
 ecs_cliente.register_task_definition( 
-     family='task{}'.format(os.environ['ECR_REPO_NAME']),
+     family=task_name,
      cpu ='256',
      memory = '512',
      requiresCompatibilities= ['FARGATE'],
@@ -54,7 +55,7 @@ print("Creando Servicio de ECS")
 
 ecs_cliente.create_service(cluster='dummylinear',
                            serviceName='svcdummylinear2',
-                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:1'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],os.environ['ECR_REPO_NAME']),
+                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:3'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],task_name),
                            launchType ='FARGATE',
                            desiredCount=1,
                            networkConfiguration= {
