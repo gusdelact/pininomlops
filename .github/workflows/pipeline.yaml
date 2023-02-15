@@ -32,7 +32,7 @@ jobs:
       run: |
          python 04_validar.py
     - name: Aprovisionar
-       env:
+      env:
          AWS_ACCESS_KEY_ID:  ${{secrets.AWS_ACCESS_KEY_ID}}
          AWS_ACCESS_KEY_ID:  ${{secrets.AWS_SECRET_ACCESS_KEY}}
          ACCOUNT_NUMBER: ${{secrets.ACCOUNT_NUMBER}}
