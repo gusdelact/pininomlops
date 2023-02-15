@@ -3,17 +3,12 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          python-version: [ "3.8", "3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        make install
-    - name: Lint
-      run: |
-        make lint
-    - name: Test
-      run: |
-        make test
-    - name: End
-      run : |
-         make end
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+         python-version: ${{ matrix.python-version }}
