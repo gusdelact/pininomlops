@@ -44,7 +44,7 @@ jobs:
       uses:  aws-actions/amazon-ecr-login@v1
     - name: Imagen Contendor
       run: |
-         docker build . --file Dockerfile --tag dummyml:latest
+         docker build . --file Dockerfile --tag dummylinearawsgus:latest
          docker tag dummylinearawsgus:latest 740327929864.dkr.ecr.us-east-1.amazonaws.com/dummylinearawsgus:latest
          docker push 740327929864.dkr.ecr.us-east-1.amazonaws.com/dummylinearawsgus:latest
       
