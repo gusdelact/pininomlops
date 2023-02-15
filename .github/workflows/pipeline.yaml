@@ -1,0 +1,57 @@
+name: Pipeline
+on: [push]
+env:
+  AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  ACCOUNT_NUMBER: ${{ secrets.ACCOUNT_NUMBER }}
+  ECR_REPO_NAME: ${{ vars.ECR_REPO_NAME }}
+  AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          python-version: [ "3.8"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+         python-version: ${{ matrix.python-version }}
+    - name: Instalar dependencias
+      run: |
+         python -m pip install --upgrade pip
+         pip install -r requirements.txt
+    - name: Generar Datos
+      run: |
+         python 01_generar_datos.py
+         ls -l sample.csv
+    - name: Ingestar Datos
+      run: |
+         python 02_ingestar.py
+         ls -l train.csv test.csv
+    - name: Entrenar 
+      run: |
+         python 03_entrenar.py
+         ls -l mlparams
+    - name: Probar
+      run: |
+         python 04_validar.py
+    - name: Aprovisionar
+      run: |
+        python 05_aprovisionar.py
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+    - name: Login to Amazon ECR
+      uses:  aws-actions/amazon-ecr-login@v1
+    - name: Imagen Contendor
+      run: |
+         docker build . --file Dockerfile --tag dummylinearawsgus:latest
+         docker tag dummylinearawsgus:latest 740327929864.dkr.ecr.us-east-1.amazonaws.com/dummylinearawsgus:latest
+         docker push 740327929864.dkr.ecr.us-east-1.amazonaws.com/dummylinearawsgus:latest
+      
+    

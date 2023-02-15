@@ -44,9 +44,7 @@ def train(features,target,etha,debug=False,iter=100) :
      loss_list.append(L.item())
      L.backward() 
      if debug:
-      print(L.item())
-      print((w_1.grad.item(),b_1.grad.item()))
-    # with tr.no_grad():
+      print("Iteracion {}: Perdida {} : Parametros {}",i,L.item(),(w_1.grad.item(),b_1.grad.item()))
      w_1.data = w_1.data -  w_1.grad.data*etha
      b_1.data = b_1.data -  b_1.grad.data*etha
      w_1.grad.zero_()
