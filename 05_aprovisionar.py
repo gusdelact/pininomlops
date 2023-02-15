@@ -47,8 +47,8 @@ ecs_cliente.register_task_definition(
     
  )
  
-#esperar 30 segundos
-time.sleep(30)
+#esperar 2 minutos
+time.sleep(120)
 #Crear servicio
 print("Creando Servicio de ECS")
 
