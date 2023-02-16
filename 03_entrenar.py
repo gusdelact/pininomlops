@@ -64,7 +64,7 @@ x_feature = torch.from_numpy(  dataset_feature0_train.to_numpy() )
 y_label = torch.from_numpy(  dataset_label_train.to_numpy() )
 
 
-(e_w_1,e_b_1,e_L)=train(x_feature,y_label,0.00001,debug=False,iter=10000)
+(e_w_1,e_b_1,e_L)=train(x_feature,y_label,0.00001,debug=False,iter=100000)
 
 mse=MSE_score(y_label,estimate(x_feature,e_w_1,e_b_1))
 r2=R2_score(y_label,estimate(x_feature,e_w_1,e_b_1))
