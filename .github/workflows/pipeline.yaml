@@ -51,7 +51,7 @@ jobs:
     - name: Imagen Contendor
       run: |
          docker build . --file Dockerfile --tag dummylinearawsgus:latest
-         docker tag dummylinearawsgus:latest  ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}amazonaws.com/dummylinearawsgus:latest
+         docker tag dummylinearawsgus:latest ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/dummylinearawsgus:latest
          docker push  ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/dummylinearawsgus:latest
       
     
