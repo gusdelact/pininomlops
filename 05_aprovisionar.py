@@ -3,7 +3,7 @@ import os
 import time
 
 
-
+print(os.environ)
 #crear repositorio de imagen de contenedores - Elastic Container Registry
 
 print("Creando Registro de Imagen del contenedor")
@@ -44,10 +44,10 @@ ecs_cliente.register_task_definition(
 time.sleep(30)
 #Crear servicio
 print("Creando Servicio de ECS")
-
+service_name = os.environ['SERVICE_NAME']
 ecs_cliente.create_service(cluster='dummylinear',
-                           serviceName='svcdummylinear3',
-                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:3'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],task_name),
+                           serviceName=service_name,
+                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:1'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],task_name),
                            launchType ='FARGATE',
                            desiredCount=1,
                            networkConfiguration= {
