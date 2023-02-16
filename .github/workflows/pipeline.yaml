@@ -37,9 +37,9 @@ jobs:
     - name: Probar
       run: |
          python 04_validar.py
-    - name: Aprovisionar
-      run: |
-        python 05_aprovisionar.py
+    # - name: Aprovisionar
+    #   run: |
+    #     python 05_aprovisionar.py
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -51,7 +51,7 @@ jobs:
     - name: Imagen Contendor
       run: |
          docker build . --file Dockerfile --tag dummylinearawsgus:latest
-         docker tag dummylinearawsgus:latest 740327929864.dkr.ecr.us-east-1.amazonaws.com/dummylinearawsgus:latest
-         docker push 740327929864.dkr.ecr.us-east-1.amazonaws.com/dummylinearawsgus:latest
+         docker tag dummylinearawsgus:latest ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/dummylinearawsgus:latest
+         docker push  ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/dummylinearawsgus:latest
       
     
