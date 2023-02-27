@@ -84,7 +84,7 @@ if create_task_definition or create_service :
                                 }   
                             }
                           )
-         print("Datos del servicion",svc_info)
+        print("Datos del servicion",svc_info)
        else :
            print("ECR_REPO_NAME SERVICE_NAME ECS_CLUSTER SG_SERVICE SUB01 SUB02 VERSION_TASKDEF debe ser configurada")
            for variable in str.split("ECR_REPO_NAME SERVICE_NAME ECS_CLUSTER SG_SERVICE SUB01 SUB02 VERSION_TASKDEF") :
