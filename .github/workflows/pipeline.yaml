@@ -46,7 +46,7 @@ jobs:
     - name: Aprovisionar Repositorio y Definicion de tarea
       if:  vars.ECS_TASK_INICIAR == 'si'
       run: |
-        python 05_aprovisionar.py -r
+        python 05_aprovisionar.py -t
     - name: Aprovisionar Servicio
       if:  vars.ECS_SERVICIO_INICIAR == 'si'
       run: |
