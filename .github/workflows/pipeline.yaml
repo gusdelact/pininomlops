@@ -7,6 +7,11 @@ env:
   ECR_REPO_NAME: ${{ vars.ECR_REPO_NAME }}
   AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
   SERVICE_NAME:  ${{ vars.SERVICE_NAME }}
+  ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+  SG_SERVICE: ${{ vars.SG_SERVICE }}
+  SUB01:  ${{ vars.SUB01 }}
+  SUB02:  ${{ vars.SUB02 }}
+  VERSION_TASKDEF: ${{ vars.VERSION_TASKDEF }}
   
 jobs:
   build:
