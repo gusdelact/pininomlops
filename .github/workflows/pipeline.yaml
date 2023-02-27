@@ -3,7 +3,7 @@ on:  workflow_dispatch
 env:
   AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  ACCOUNT_NUMBER: ${{ secrets.ACCOUNT_NUMBER }}
+  ACCOUNT_NUMBER: ${{ vars.ACCOUNT_NUMBER }}
   ECR_REPO_NAME: ${{ vars.ECR_REPO_NAME }}
   AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
   SERVICE_NAME:  ${{ vars.SERVICE_NAME }}
