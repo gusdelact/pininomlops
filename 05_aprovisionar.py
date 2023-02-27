@@ -44,7 +44,7 @@ if create_task_definition or create_service :
          print("Creando Definicion de Tarea de ECS ",task_name)
          roleArn = 'arn:aws:iam::{}:role/ecsTaskExecutionRole'.format(os.environ['ACCOUNT_NUMBER'])
          print("executionRoleArn",roleArn)
-         ecs_cliente.register_task_definition( 
+         datos_tarea=ecs_cliente.register_task_definition( 
             family=task_name,
             cpu ='256',
             memory = '512',
@@ -61,6 +61,7 @@ if create_task_definition or create_service :
              }
            ] 
          )
+         print("Datos de tarea", datos_tarea)
        else :
            print("ECR_REPO_NAME debe ser configurada")
            exit(3)
@@ -70,7 +71,7 @@ if create_task_definition or create_service :
         service_name = os.environ['SERVICE_NAME']
         print("Creando Servicio de ECS ",service_name)
         task_name = 'task{}'.format(os.environ['ECR_REPO_NAME'])
-        ecs_cliente.create_service(cluster= os.environ ['ECS_CLUSTER'],
+        svc_info=ecs_cliente.create_service(cluster= os.environ ['ECS_CLUSTER'],
                            serviceName=service_name,
                            taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:{}'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],task_name,os.environ['VERSION_TASKDEF']),
                            launchType ='FARGATE',
@@ -83,6 +84,7 @@ if create_task_definition or create_service :
                                 }   
                             }
                           )
+         print("Datos del servicion",svc_info)
        else :
            print("ECR_REPO_NAME SERVICE_NAME ECS_CLUSTER SG_SERVICE SUB01 SUB02 VERSION_TASKDEF debe ser configurada")
            for variable in str.split("ECR_REPO_NAME SERVICE_NAME ECS_CLUSTER SG_SERVICE SUB01 SUB02 VERSION_TASKDEF") :
