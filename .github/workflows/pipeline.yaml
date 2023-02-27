@@ -39,9 +39,18 @@ jobs:
     - name: Probar
       run: |
          python 04_validar.py
-    - name: Aprovisionar
+    - name: Aprovisionar Repositorio y
+      if:  vars.ECR_INICIAR == 'si'
       run: |
-        python 05_aprovisionar.py
+        python 05_aprovisionar.py -r
+    - name: Aprovisionar Repositorio y Definicion de tarea
+      if:  vars.ECS_TASK_INICIAR == 'si'
+      run: |
+        python 05_aprovisionar.py -r
+    - name: Aprovisionar Servicio
+      if:  vars.ECS_SERVICIO_INICIAR == 'si'
+      run: |
+        python 05_aprovisionar.py -s
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
