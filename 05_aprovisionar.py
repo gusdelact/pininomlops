@@ -42,6 +42,8 @@ if create_task_definition or create_service :
        if 'ECR_REPO_NAME' in os.environ :
          task_name = 'task{}'.format(os.environ['ECR_REPO_NAME'])
          print("Creando Definicion de Tarea de ECS ",task_name)
+         roleArn = 'arn:aws:iam::{}:role/ecsTaskExecutionRole'.format(os.environ['ACCOUNT_NUMBER'])
+         print("executionRoleArn",roleArn)
          ecs_cliente.register_task_definition( 
             family=task_name,
             cpu ='256',
@@ -49,7 +51,7 @@ if create_task_definition or create_service :
             requiresCompatibilities= ['FARGATE'],
             runtimePlatform = {'cpuArchitecture': 'X86_64', 'operatingSystemFamily': 'LINUX'},
             networkMode = 'awsvpc' ,
-            executionRoleArn = 'arn:aws:iam::{}:role/ecsTaskExecutionRole'.format(os.environ['ACCOUNT_NUMBER']),
+            executionRoleArn = roleArn,
             containerDefinitions=[
              { 
                 'name': os.environ['ECR_REPO_NAME'],
