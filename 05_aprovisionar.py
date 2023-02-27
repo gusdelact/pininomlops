@@ -65,31 +65,31 @@ if create_task_definition or create_service :
            print("ECR_REPO_NAME debe ser configurada")
            exit(3)
     if create_service :
-       if 'ECR_REPO_NAME' in os.environ  and 'SERVICE_NAME' in os.environ :
+       if 'ECR_REPO_NAME' in os.environ  and 'SERVICE_NAME' in os.environ and 'ECS_CLUSTER' in  os.environ and  'SG_SERVICE' in  os.environ  and 'SUB01' in  os.environ   and 'SUB02' in  os.environ and  'VERSION_TASKDEF'  in  os.environ   :
         #Crear servicio
         service_name = os.environ['SERVICE_NAME']
         print("Creando Servicio de ECS ",service_name)
         task_name = 'task{}'.format(os.environ['ECR_REPO_NAME'])
-        ecs_cliente.create_service(cluster='dummylinear',
+        ecs_cliente.create_service(cluster= os.environ ['ECS_CLUSTER'],
                            serviceName=service_name,
-                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:1'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],task_name),
+                           taskDefinition='arn:aws:ecs:{}:{}:task-definition/{}:{}'.format(os.environ ['AWS_DEFAULT_REGION'],os.environ['ACCOUNT_NUMBER'],task_name,os.environ['VERSION_TASKDEF']),
                            launchType ='FARGATE',
                            desiredCount=1,
                            networkConfiguration= {
                                'awsvpcConfiguration': {
                                   'assignPublicIp' : 'ENABLED',
-                                  'securityGroups': ['sg-025066ab05b7439d2'],
-                                  'subnets': ['subnet-0d5bef679df57ba9e',
-                                               'subnet-02efe5c7251ec5212',
-                                               'subnet-02acd8f884e171a3c',
-                                               'subnet-08c84ad9ae30a370d',
-                                               'subnet-0615686222a56563b',
-                                               'subnet-01c5e49442af85ab1'],
+                                  'securityGroups': [ os.environ ['SG_SERVICE']],
+                                  'subnets': [ os.environ ['SUB01'] ,  os.environ ['SUB02'] ],
                                 }   
                             }
                           )
        else :
-           print("ECR_REPO_NAME SERVICE_NAME debe ser configurada")
+           print("ECR_REPO_NAME SERVICE_NAME ECS_CLUSTER SG_SERVICE SUB01 SUB02 VERSION_TASKDEF debe ser configurada")
+           for variable in str.split("ECR_REPO_NAME SERVICE_NAME ECS_CLUSTER SG_SERVICE SUB01 SUB02 VERSION_TASKDEF") :
+             if variable in os.environ :
+               print(os.environ[variable]) 
+             else :
+               print("Variable de ambiente no configurada", variable)
            exit(4)                 
 
 #mostrar definciones de tare y servicios en JSON
