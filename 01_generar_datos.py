@@ -6,7 +6,7 @@ import torch
 #generar una línea recta con ruido
 data_x=np.arange(-5,5,0.1,dtype=float)
 (n_x) = data_x.size
-in_w1 = 1.5
+in_w1 = 2.6667
 in_b = 1.33
 ruido = np.random.randn(n_x)
 data_y = data_x*in_w1 + in_b #*ruido
