@@ -1,21 +1,12 @@
-import pandas as pd
-import numpy as np
-import torch
+import boto3
 
+# Crear un cliente S3
+s3 = boto3.client('s3')
 
-#generar una línea recta con ruido
-data_x=np.arange(-5,5,0.1,dtype=float)
-(n_x) = data_x.size
-in_w1 = 2.6667
-in_b = 1.33
-ruido = np.random.randn(n_x)
-data_y = data_x*in_w1 + in_b #*ruido
+# Definir el nombre del bucket y la ruta del archivo
+bucket_name = 'datalatet01740327929864'
+file_path = 'regresionlogistica/hearing_test.csv'
 
-#guardar al archivo
-salida = pd.DataFrame( )
-salida['feature0'] = pd.DataFrame(data_x)
-salida['label'] = pd.DataFrame(data_y)
-salida.set_index('feature0')
-salida.info()
-
-salida.to_csv("sample.csv", index=False)
+# Descargar el archivo desde S3
+with open('hearing_test.csv', 'wb') as f:
+    s3.download_fileobj(bucket_name, file_path, f)
